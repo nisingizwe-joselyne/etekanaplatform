@@ -62,11 +62,12 @@
                                
                                 <div class="card-body">
                             <button type="button" class="btn btn-primary d-block mb-2" style="width:100%" data-toggle="modal" data-target="#myModal">
-                                        Watch Video
+                                <span><i class="fa fa-video"></i> Watch Video </span>
                             </button>
                                     @forelse ($read as $file)
-                            <img class="img img-responsive img-thumbnail" src="{{ asset('Uploaded Files/'.$file->attached_file) }}">
-                                      @empty
+                            <a href="{{ asset('Uploaded Files/'.$file->attached_file) }}"><img class="img img-responsive img-thumbnail" src="{{ asset('Uploaded Files/'.$file->attached_file) }}"></a>
+                            <a class="btn btn-outline-primary d-block mt-2" href="{{ asset('Uploaded Files/'.$file->attached_file) }}" download><span><i class="fa fa-download"></i> Download</span></a>         
+                            @empty
                                     No attached files
                                       @endforelse
                                 </div>
@@ -90,14 +91,22 @@
   
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h4 class="modal-title">
+              @foreach($read as $note)
+         {{$chosenCourse->course}} {{$note->chapter}}
+           @endforeach
+            </h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
   
         <!-- Modal body -->
         <div class="modal-body">
-            <iframe width="753" height="380" src="https://www.youtube.com/embed/y0yH7-4BlC0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-         </div>
+            @forelse ($read as $video)
+            <iframe width="753" height="380" src="{{$video->video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            @empty
+        No Video Available
+        @endforelse
+        </div>
   
         <!-- Modal footer -->
         <div class="modal-footer">

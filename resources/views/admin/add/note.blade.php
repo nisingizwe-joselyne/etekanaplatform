@@ -87,7 +87,7 @@
                     @enderror 
                     </div>
                         <div class="form-group">
-                            <label for="photo">Enter Youtube Video URL</label>
+                            <label for="photo">Copy youtube video source found in embed and paste it here.</label>
                             <input type="text" value="{{old('url')}}" class="form-control @error('url') is-invalid @enderror" id="url" name="url" placeholder="Place Youtube URL Here..." required>
                             @error('url')
                             <span class="invalid-feedback" role="alert">

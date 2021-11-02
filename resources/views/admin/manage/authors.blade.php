@@ -46,8 +46,7 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Created_at</th>
@@ -59,8 +58,7 @@
                    @foreach ($authors as $author)
                    <tr> 
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $author->first_name }}</td>
-                    <td>{{ $author->last_name }}</td>
+                    <td>{{ $author->first_name }} {{ $author->last_name }}</td>
                     <td>{{ $author->email }}</td>
                     <td>{{ $author->phone }}</td>
                     <td>{{ $author->created_at }}</td>
@@ -81,8 +79,7 @@
                   <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Created_at</th>

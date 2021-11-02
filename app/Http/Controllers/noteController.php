@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\topic;
 use App\Models\author;
 use App\Models\course;
+use App\Models\chapter; 
+use App\Models\read;
 
-class topicsController extends Controller
+class noteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +17,14 @@ class topicsController extends Controller
      */
     public function index()
     {
-        $topics = topic::join('authors', 'topics.author_id', '=', 'authors.id')
-        ->join('courses', 'topics.course_id', '=', 'courses.id')
-        ->select('topics.*', 'authors.first_name', 'authors.last_name', 'courses.course')
-        ->orderBy('topics.id', 'DESC')
+        $read = read::join('authors', 'reads.author_id', '=', 'authors.id')
+        ->join('chapters', 'reads.chapter_id', '=', 'chapters.id')
+        ->join('courses', 'chapters.course_id', '=', 'courses.id')
+        ->select('reads.*', 'authors.first_name', 'authors.last_name', 'chapters.chapter', 'courses.course')
+        ->orderBy('reads.id', 'DESC')
         ->get();
 
-        return view('admin.manage.topics', compact('topics'));
+        return view('admin.manage.notes', compact('read'));
     }
 
     /**
@@ -34,7 +36,13 @@ class topicsController extends Controller
     {
         $authors = author::orderBy('first_name', 'ASC')->get();
         $courses = course::orderBy('course', 'ASC')->get();
-        return view('admin.add.topic', compact('authors', 'courses'));
+
+        $chapters = chapter::join('courses', 'chapters.course_id', '=', 'courses.id')
+        ->select('chapters.*', 'courses.course')
+        ->orderBy('chapters.chapter', 'DESC')
+        ->get();
+
+        return view('admin.add.note', compact('authors', 'courses', 'chapters'));
     }
 
     /**
@@ -45,32 +53,31 @@ class topicsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+         $request->validate([
             'author' => ['required', 'string', 'max:255'],
-            'course' => ['required', 'string', 'max:255'],
+            'chapter' => ['required', 'string', 'max:255'],
             'url' => ['required', 'string', 'max:255'],
-            'topic' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string']
+            'attached_file' => ['required'],
+            'description' => ['required']
             ]);
 
-            $powerpoint= $request->powerpoint->getClientOriginalName();
-            $newPowerpoint= date('Ymd').'_'.time().'_'.$powerpoint;
+            $attached_file= $request->attached_file->getClientOriginalName();
+            $newAttached_file= date('Ymd').'_'.time().'_'.$attached_file;
 
-           $topic = topic::create([
+           $read = read::create([
                 'author_id'=>$request->input('author'),
-                'course_id'=>$request->input('course'),
-                'url'=>$request->input('url'),
-                'topic'=>$request->input('topic'),
-                'powerpoint'=>$newPowerpoint,
+                'chapter_id'=>$request->input('chapter'),
+                'video_url'=>$request->input('url'),
+                'attached_file'=>$newAttached_file,
                 'description'=>$request->input('description'),
                 ]);
 
-                if($topic){
-                    $request->powerpoint->move(public_path('Powerpoints'), $newPowerpoint);
-                    return redirect()->back()->with('addTopicSuccess','Topic has been published successfully');
+                if($read){
+                    $request->attached_file->move(public_path('Uploaded Files'), $newAttached_file);
+                    return redirect()->back()->with('addNoteSuccess','Note has been published successfully');
                 }
                 else{
-                    return redirect()->back()->with('addTopicFail','Topic could not be published');
+                    return redirect()->back()->with('addNoteFail','Note could not be published');
                 }
     }
 

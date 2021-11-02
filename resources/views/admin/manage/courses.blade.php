@@ -47,6 +47,8 @@
                   <tr>
                     <th>#</th>
                     <th>Course</th>
+                    <th>Requirements</th>
+                    <th>Intro</th>
                     <th>Created_at</th>
                     <th>Actions</th>
                   </tr>
@@ -57,6 +59,8 @@
                    <tr> 
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $course->course }}</td>
+                    <td>{{ $course->requirements }}</td>
+                    <td>{{ $course->intro }}</td>
                     <td>{{ $course->created_at }}</td>
                     <td>
                         <form method="POST" action="{{ route('course.destroy', $course->id) }}">
@@ -76,6 +80,8 @@
                   <tr>
                     <th>#</th>
                     <th>course</th>
+                    <th>Requirements</th>
+                    <th>Intro</th>
                     <th>Created_at</th>
                     <th>Actions</th>
                   </tr>

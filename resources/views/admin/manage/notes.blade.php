@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>topics</h1>
+            <h1>Notes</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">topics</li>
+              <li class="breadcrumb-item active">Notes</li>
             </ol>
           </div>
         </div>
@@ -26,19 +26,19 @@
       <div class="row">
           <div class="col-12">
 
-            @if (Session::has('deleteTopicSuccess'))
+            @if (Session::has('deleteNoteSuccess'))
             <div class="alert alert-success alert-dismissible mb-2" style="margin: 5px 5px 0px 5px;">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> 
-          <strong><i class="fas fa-check"></i></strong> {{ Session::get('deleteTopicSuccess') }} </div>
-          @elseif(Session::has('deleteTopicFail'))
+          <strong><i class="fas fa-check"></i></strong> {{ Session::get('deleteNoteSuccess') }} </div>
+          @elseif(Session::has('deleteNoteFail'))
           <div class="alert alert-danger alert-dismissible mb-2" style="margin: 5px 5px 0px 5px;">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> 
-          <strong>FAILED:</strong> {{ Session::get('deleteTopicFail') }} </div> 
+          <strong>FAILED:</strong> {{ Session::get('deleteNoteFail') }} </div> 
             @endif
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Manage topics</h3>
+                <h3 class="card-title">Manage Courses</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -46,35 +46,39 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Author</th>
                     <th>Course</th>
-                    <th>Topic</th>
+                    <th>Chapter</th>
+                    <th>Requirements</th>
                     <th>URL</th>
                     <th>Description</th>
-                    <th>Powerpoint</th>
+                    <th>Attachment</th>
+                    <th>Views</th>
                     <th>Created_at</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
                   <tbody>
                  
-                   @foreach ($topics as $topic)
+                   @foreach ($read as $read)
                    <tr> 
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $topic->first_name }} {{ $topic->last_name }}</td>
-                    <td>{{ $topic->course }}</td>
-                    <td>{{ $topic->topic }}</td>
-                    <td><a href="{{ $topic->url }}">{{ $topic->url }}</a></td>
-                    <td>{!! $topic->description !!}</td>
-                    <td>{{ $topic->powerpoint }}</td>
-                    <td>{{ $topic->created_at }}</td>
+                    <td>{{ $read->first_name }} {{ $read->last_name }}</td>
+                    <td>{{ $read->course }}</td>
+                    <td>{{ $read->chapter }}</td>
+                    <td>{{ $read->requirements }}</td>
+                    <td>{{ $read->video_url }}</td>
+                    <td>{{ $read->description }}</td>
+                    <td>{{ $read->attached_file }}</td>
+                    <td>{{ $read->views }}</td>
+                    <td>{{ $read->created_at }}</td>
                     <td>
-                        <form method="topic" action="{{ route('topic.destroy', $topic->id) }}">
-                          @csrf
+                        <form method="POST" action="{{ route('note.destroy', $read->id) }}">
+                            @csrf
                             @method('DELETE')
-                            <a href="{{ route('topic.edit', $topic->id) }}" class="text-primary"><i class="fa fa-edit"></i></a>
+                            <a href="{{ route('note.edit', $read->id) }}" class="btn btn-primary"><span><i class="fa fa-edit"></i></span>Edit</a>
                             &nbsp;
-                            <button type="submit" class="text-danger btn borderless"><i class="fa fa-trash"></i></button>
+                            <button type="submit" class="btn btn-danger"><span><i class="fa fa-trash"></i></span> Delete</button>
                         </form>
                         </td>
                   </tr>   
@@ -85,12 +89,14 @@
                   <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Author</th>
                     <th>Course</th>
-                    <th>Topic</th>
+                    <th>Chapter</th>
+                    <th>Requirements</th>
                     <th>URL</th>
                     <th>Description</th>
-                    <th>Powerpoint</th>
+                    <th>Attachment</th>
+                    <th>Views</th>
                     <th>Created_at</th>
                     <th>Actions</th>
                   </tr>

@@ -4,17 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\pagesController;
 use App\Http\Controllers\authorController;
-use App\Http\Controllers\categoryController;
-use App\Http\Controllers\postController;
 use App\Http\Controllers\composeMailController;
-use App\Http\Controllers\videoController;
 use App\Http\Controllers\subscriptionController;
 use App\Http\Controllers\broadcastController;
 use App\Http\Controllers\messageController;
 use App\Http\Controllers\endUserController;
 
 use App\Http\Controllers\courseController; 
-use App\Http\Controllers\topicsController;
+use App\Http\Controllers\chapterController; 
+use App\Http\Controllers\readController;
+use App\Http\Controllers\noteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +40,6 @@ Route::resource('message', messageController::class);
 
 Route::get('/admin', [pagesController::class, 'admin']);
 Route::resource('author', authorController::class);
-//Route::resource('mycategory', categoryController::class);
-
-Route::resource('post', postController::class);
-Route::resource('video', videoController::class);
 Route::resource('endUser', endUserController::class);
 
 // Route::resource('endUser', endUserController::class);
@@ -57,8 +52,11 @@ Route::get('/courses', [pagesController::class, 'courses'])->name('courses');
 Route::get('redirect', [SocialController::class, 'redirect']);
 Route::get('callback', [SocialController::class, 'callback']);
 
-
+Route::get('read/{id}', [pagesController::class, 'read'])->name('read');
 
 
 Route::resource('course', courseController::class);
-Route::resource('topic', topicsController::class);
+
+Route::resource('chapter', chapterController::class);
+Route::resource('read', readController::class);
+Route::resource('note', noteController::class);

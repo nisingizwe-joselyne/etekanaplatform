@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class topic extends Model
+class chapter extends Model
 {
     use HasFactory;
-    protected $table='topics';
+    protected $table='chapters';
     protected $primaryKey='id';
-    protected $fillable=['author_id', 'course_id', 'url', 'topic', 'powerpoint', 'description', 'views'];
-
-    public function author(){
-        return $this->belongsTo(author::class);
-    }
+    protected $fillable=['course_id', 'chapter'];
 
     public function course(){
         return $this->belongsTo(course::class);

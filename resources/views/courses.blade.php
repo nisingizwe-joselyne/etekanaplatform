@@ -9,7 +9,7 @@
 						<div class="row">
 							<div class="col">
 								<ul class="breadcrumb">
-									<li><a href="/">Home</a></li>
+									<li><a href="#">Home</a></li>
 									<li class="active">Courses</li>
 								</ul>
 							</div>
@@ -28,18 +28,19 @@
 					<div class="row">
 						<div class="col">
 
-							<h2 class="font-weight-normal text-7 mb-2">There are  <strong class="font-weight-extra-bold">{{$coursesCounter}}</strong> Available Courses for you</h2>
-		
-                            <hr class="solid my-5">
+							<h2 class="font-weight-normal text-7 mb-2">{{$coursesCounter}} Courses</strong></h2>
 
-							<div class="toggle toggle-primary" data-plugin-toggle>
-                                @foreach($courses as $course)
-                                <section class="toggle">
-									<label>{{$loop->iteration}}. {{$course->course}}</label>
-									<p>{{$course->topic}}</p>
-								</section>
-                                @endforeach
-							</div>
+							<hr class="solid my-5">
+
+                            @foreach ($courses as $course)
+							<div class="card bg-primary p-2 text-light">
+								<div class="d-flex justify-content-between">
+								<div><a class="nav-link text-light" href="{{route('course.show', $course->id)}}">{{$loop->iteration}}. {{$course->course}}</a></div>
+								<div><a href="{{route('course.show', $course->id)}}" class="btn text-light"><i class="fa fa-arrow-right"></i></a></div>
+								</div>
+							</div>	
+							<hr>
+							@endforeach
 
 						</div>
 

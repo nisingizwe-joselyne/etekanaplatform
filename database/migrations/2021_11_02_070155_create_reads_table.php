@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateReadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('reads', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('author_id');
-            $table->unsignedInteger('category_id');
-            $table->string('photo');
-            $table->string('title');
-            $table->longText('post');
+            $table->unsignedInteger('chapter_id');
+            $table->string('video_url')->nullable();
+            $table->string('requirements');
+            $table->string('attached_file')->nullable();
+            $table->longText('description');
             $table->integer('views')->default(0);
             $table->timestamps();
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
+            $table->foreign('chapter_id')->references('id')->on('chapters')->onDelete('cascade');
         });
     }
 
@@ -35,6 +35,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('reads');
     }
 }

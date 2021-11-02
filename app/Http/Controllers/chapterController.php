@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\course;
 use App\Models\chapter;
-use App\Models\read;
 
-class courseController extends Controller
+class chapterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,12 @@ class courseController extends Controller
      */
     public function index()
     {
-        $courses = course::orderBy('course', 'ASC')->get();
-        return view('admin.manage.courses', compact('courses'));
+         $chapters = chapter::join('courses', 'chapters.course_id', '=', 'courses.id')
+        ->select('chapters.*', 'courses.course')
+        ->orderBy('chapters.chapter', 'DESC')
+        ->get();
+
+        return view('admin.manage.chapters', compact('chapters'));
     }
 
     /**
@@ -27,7 +30,8 @@ class courseController extends Controller
      */
     public function create()
     {
-        return view('admin.add.course');
+        $courses = course::orderBy('course', 'ASC')->get();
+        return view('admin.add.chapter', compact('courses'));
     }
 
     /**
@@ -40,21 +44,19 @@ class courseController extends Controller
     {
         $request->validate([
             'course' => ['required', 'string', 'max:255'],
-            'requirements' => ['required', 'string', 'max:1000'],
-            'intro' => ['required', 'string', 'max:1000'],
+            'chapter' => ['required', 'string', 'max:255'],
             ]);
 
-           $course = course::create([
-                'course'=>$request->input('course'),
-                'requirements'=>$request->input('requirements'),
-                'intro'=>$request->input('intro')
+           $chapter = chapter::create([
+                'course_id'=>$request->input('course'),
+                'chapter'=>$request->input('chapter'),
                 ]);
 
-                if($course){
-                    return redirect()->back()->with('addCourseSuccess','Course has been added successfully');
+                if($chapter){
+                    return redirect()->back()->with('addChapterSuccess','Chapter has been added successfully');
                 }
                 else{
-                    return redirect()->back()->with('addCourseFail','Course could not be added');
+                    return redirect()->back()->with('addChapterFail','Chapter could not be added');
                 }
     }
 
@@ -64,27 +66,9 @@ class courseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($id)
     {
-
-        $chapters = chapter::join('courses', 'chapters.course_id', '=', 'courses.id')
-        ->where('courses.id', '=', $id)
-        ->select('chapters.*', 'courses.course')
-        ->get();
-
-        $request->session()->put('Chapters', $chapters);
-
-      
-        $chaptersCounter = chapter::join('courses', 'chapters.course_id', '=', 'courses.id')
-        ->where('courses.id', '=', $id)
-        ->count();
-
-        $courses = course::all();
-
-        $chosenCourse = course::findOrFail($id);
-        $request->session()->put('selectedCourse', $chosenCourse);
-        
-        return view('course-details', compact('chapters', 'chaptersCounter', 'courses', 'chosenCourse'));
+        //
     }
 
     /**

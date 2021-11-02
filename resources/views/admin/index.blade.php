@@ -59,14 +59,14 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>{{$posts}}</h3>
+              <h3>post</h3>
 
               <p>Posts</p>
             </div>
             <div class="icon">
               <i class="fas fa-copy"></i>
             </div>
-            <a href="{{ route('post.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -92,8 +92,6 @@
         <!-- Left col -->
       <section class="col-lg-7 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
-         
-          <!-- /.card -->
 
           <!-- DIRECT CHAT -->
           <div class="card direct-chat direct-chat-primary">

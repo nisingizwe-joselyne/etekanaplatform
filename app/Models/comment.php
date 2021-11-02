@@ -11,7 +11,7 @@ class comment extends Model
     protected $table='comments';
     protected $primaryKey='id';
 
-    protected $fillable=['user_id', 'post_id', 'comment'];
+    protected $fillable=['user_id', 'read_id', 'comment'];
 
     public function user(){
         return $this->belongsTo(User::class);

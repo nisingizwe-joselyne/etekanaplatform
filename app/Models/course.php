@@ -10,7 +10,7 @@ class course extends Model
     use HasFactory;
     protected $table='courses';
     protected $primaryKey='id';
-    protected $fillable=['course'];
+    protected $fillable=['course', 'intro', 'requirements'];
 
     public function posts(){
         return $this->hasMany(post::class);

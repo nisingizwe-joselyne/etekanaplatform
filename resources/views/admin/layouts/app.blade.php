@@ -284,21 +284,45 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Topics
+                Chapters
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('topic.create') }}" class="nav-link">
+                <a href="{{ route('chapter.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add Topic</p>
+                  <p>Add Chapter</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('topic.index') }}" class="nav-link">
+                <a href="{{ route('chapter.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Topics</p>
+                  <p>Manage Chapters</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Notes
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('note.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Note</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('note.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Notes</p>
                 </a>
               </li>
             </ul>

@@ -84,28 +84,11 @@
 													</li>
 
 													<li class="dropdown">
-														<a class="dropdown-item dropdown-toggle">
-															Services
+														<a class="nav-link" href="{{route('courses')}}">
+															Courses
 														</a>
-														<ul class="dropdown-menu">
-															<li>
-																<a class="dropdown-item" href="{{route('courses')}}">
-																	Courses
-																</a>
-															</li>
-															<li>
-																<a class="dropdown-item" href="index.html">
-																	Landing Page
-																</a>
-															</li>
-															<li>
-																<a class="dropdown-item" href="index.html">
-																	Landing Page
-																</a>
-															</li>
-														</ul>
 													</li>
-
+													
 													<li class="dropdown">
 														<a class="nav-link" href="/about-us">
 															About Us

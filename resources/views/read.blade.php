@@ -28,7 +28,7 @@
 					<div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-12 col-12" style="background-color: #f5f5f5;">
                          <div class="border">
-                            <div class="bg-dark text-light p-3 mb-2">{{$chosenCourse->course}}</div>   
+                            <div class="bg-dark text-light p-3 mb-2 text-center">{{$chosenCourse->course}}</div>   
                             <ul>
                                 @forelse ($chapters as $chapter)
                                 <li><a class="nav-link text-dark" href="{{ route('read', $chapter->id) }}">{{$chapter->chapter}}</a></li>   
@@ -65,8 +65,8 @@
                                 <span><i class="fa fa-video"></i> Watch Video </span>
                             </button>
                                     @forelse ($read as $file)
-                            <a href="{{ asset('Uploaded Files/'.$file->attached_file) }}"><img class="img img-responsive img-thumbnail" src="{{ asset('Uploaded Files/'.$file->attached_file) }}"></a>
-                            <a class="btn btn-outline-primary d-block mt-2" href="{{ asset('Uploaded Files/'.$file->attached_file) }}" download><span><i class="fa fa-download"></i> Download</span></a>         
+                            <a class="text-center text-dark" href="{{ asset('Uploaded Files/'.$file->attached_file) }}"><i class="fas fa-file-powerpoint" style="font-size: 165px;"></i></a>
+                            <a class="btn btn-outline-dark d-block mt-2" href="{{ asset('Uploaded Files/'.$file->attached_file) }}" download><span><i class="fa fa-download"></i> Powerpoint</span></a>         
                             @empty
                                     No attached files
                                       @endforelse
